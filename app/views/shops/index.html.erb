@@ -1,0 +1,17 @@
+<%= link_to "商店", new_shop_path%>
+<table>
+  <tr>
+    <td>title</td>
+    <td>tel</td>
+    <td>address</td>
+  </tr>
+  <% @shops.each do |shop| %>
+<tr>
+  <td><%= link_to shop.title, shop %></td>
+  <td><%= shop.tel %></td>
+  <td><%= shop.address %></td>
+  <td><%= link_to "修改", edit_shop_path(shop) %></td>
+  <td><%= link_to "刪除", shop_path(shop), method: "delete", data:{confirm: "確定嗎"} %></td>
+</tr>
+  <% end %>
+</table>
