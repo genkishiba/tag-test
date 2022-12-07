@@ -8,8 +8,7 @@ class ShopsController < ApplicationController
   end
 
   def create
-    @shop = Shop.new(find_params)
-    if @shop.save
+    if Shop.create(find_params)
       redirect_to shops_path, notice:"新增成功"
     else
       render :new
@@ -41,6 +40,6 @@ class ShopsController < ApplicationController
 
   private
   def find_params
-    params.require(:shop).permit(:title, :tel, :address)
+    params.require(:shop).permit(:title, :tel, :address, :tag_list)
   end
 end
