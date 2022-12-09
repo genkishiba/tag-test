@@ -1,10 +1,16 @@
 class ShopsController < ApplicationController
   def index
-    @shops = Shop.all
+    # 將使用者輸入的文字打包成 params[:search] 參數
+    if params[:search]
+      @shops = Shop.where("title LIKE ?", "%#{params[:search]}%")
+    else
+      @shops = Shop.all
+    end
   end
 
   def new
     @shop = Shop.new
+
   end
 
   def create
@@ -39,8 +45,9 @@ class ShopsController < ApplicationController
     redirect_to shops_path, notice:"刪除成功"
   end
 
+
   private
   def find_params
-    params.require(:shop).permit(:title, :tel, :address)
+    params.require(:shop).permit(:title, :tel, :address, { tag_items: [] })
   end
 end
